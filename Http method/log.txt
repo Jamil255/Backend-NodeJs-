@@ -1,3 +1,14 @@
-GET new req received
-GET new req received
-GET new req received
+status code
+
+source link = https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#information_responses
+
+information respone 100-199
+successfull respone 200-299
+redirection massege 300-399
+client error response 400-499
+server error response 500-599
+created status code 201
+unauthorized status code 401 
+payment required status code 402
+forbidden status code 403
+
