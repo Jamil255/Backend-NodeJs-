@@ -11,4 +11,12 @@ created status code 201
 unauthorized status code 401 
 payment required status code 402
 forbidden status code 403
+500 Internal Server Error
+501 Not Implemented
+502 Bad Gateway
+503 Service Unavailable
+504 Gateway Timeout
+505 HTTP Version Not Supported
+506 Variant Also Negotiates
+511 Network Authentication Required
 
