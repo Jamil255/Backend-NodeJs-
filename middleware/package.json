@@ -2,11 +2,11 @@
   "name": "middleware",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index2.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon index2.js"
   },
   "keywords": [],
   "author": "",
