@@ -3,7 +3,14 @@ const app = express();
 const PORT = 3000;
 app.set('view engine', "ejs")
 app.get("/", (req, res) => {
-    res.render("index", { dayType: "a weekday", advice: "it's time to work hard" });
+    const todays= new Date().getDay()
+    let type = "a weekday"
+    let adv = "it's time to work hard"
+    if (todays === 0 || todays === 6) {
+        let type = "a weekend"
+        let adv = "it's time to have some fun "
+    }
+    res.render("index", { dayType: type, advice: adv });
 });
 
 app.listen(PORT, () => {
