@@ -1,0 +1,14 @@
+EJS  TAGS 
+
+<%= %>
+i.e <%=name="xyz" %>  js output
+<% %>
+i.e <%  console.log("hello world") %>  js executed give not  output
+<%- %>
+i.e <%- <h2>hello world</h2> %>  Render html 
+<%%  %%>
+i.e <% or  %> after closing tag is used % (only code tag)
+<%# %>
+i.e <%# comment %>    stop execution 
+<%- include("<File name>")%>
+i.e   <%- include("<header.EJS>")%>            insert another  EJS File
