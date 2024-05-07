@@ -1,16 +1,12 @@
 import express from 'express'
 import connectDb from './config/db.js'
+import route from './routes/index.js'
 const app = express()
 const PORT = 3000
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 connectDb()
-
-app.get('/', (req, res) => {
-  res.json({
-    message: 'data fetch error',
-    status: false,
-  })
-})
-
-app.listen(PORT, (req, res) => {
+app.use(route)
+app.listen(PORT, () => {
   console.log(`server listening on ${PORT}`)
 })
