@@ -10,7 +10,7 @@ const handleGenericShortUrl = async (req, res) => {
       redirectURL: body.url,
       visitHistory: [],
     })
-    return res.json({
+    return res.render('home.ejs', {
       id: response.shortId,
     })
   } catch (error) {
