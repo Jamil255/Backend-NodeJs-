@@ -82,5 +82,4 @@ const handleSingInFun = async (req, res) => {
     })
   }
 }
-
 export { handleSingUpFun, handleSingInFun }
