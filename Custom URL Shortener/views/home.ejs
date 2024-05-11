@@ -9,8 +9,8 @@
 
 <body>
     <h2>URL Shortener</h2>
-    <% if (id) { %> <!-- Check if 'id' exists -->
-        <p>URL Generated: https://localhost:3000/api/url/<%= id %>
+    <% if (locals._id) { %> <!-- Check if 'id' exists -->
+        <p>URL Generated: http://localhost:3000/api/url/<%= _id %>
         </p>
         <% } %>
 
@@ -23,6 +23,34 @@
 
                 </form>
             </div>
+            <% if (locals.urls) { %>
+                <table>
+                    <thead>
+                        <th>S.No</th>
+                        <th>ShortId</th>
+                        <th>Redirect</th>
+                        <th> Click</th>
+                    </thead>
+                    <tbody>
+                        <% urls.forEach((urls,index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index +1 %>
+                                </td>
+                                <td>
+                                    <%= urls.shortId %>
+                                </td>
+                                <td>
+                                    <%= urls.redirectURL %>
+                                </td>
+                                <td>
+                                    <%= urls.visitHistory.length %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
 </body>
 
 </html>
