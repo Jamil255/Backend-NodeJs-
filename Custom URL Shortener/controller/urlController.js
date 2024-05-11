@@ -1,7 +1,6 @@
 import generateShortId from 'ssid'
 import URL from '../models/url.js'
 const shortId = generateShortId()
-console.log(shortId)
 const handleGenericShortUrl = async (req, res) => {
   try {
     const body = req.body
@@ -10,6 +9,7 @@ const handleGenericShortUrl = async (req, res) => {
       shortId: shortId,
       redirectURL: body.url,
       visitHistory: [],
+      createdBy: req.user._id,
     })
     return res.render('home', {
       _id: shortId,
