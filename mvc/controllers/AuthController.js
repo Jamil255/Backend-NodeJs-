@@ -1,6 +1,8 @@
+import { response } from 'express'
 import UserModel from '../models/userSchema.js'
 import userSchema from '../models/userSchema.js'
 import bcrypt, { hash } from 'bcrypt'
+import jwt from 'jsonwebtoken'
 const signupController = async (req, res) => {
   try {
     const { fullName, age, email, password, gender, phone } = req.body
@@ -41,11 +43,43 @@ const signupController = async (req, res) => {
 }
 const signInController = async (req, res) => {
   try {
-    const user = await UserModel.find({})
-    res.json({
+    const { email, password } = req.body
+    if (!email || !password) {
+      res.json({
+        message: ' input field required',
+        status: false,
+      })
+      return
+    }
+
+    const user = await UserModel.findOne({ email })
+    if (!user) {
+      res.json({
+        message: 'email and password incorrect',
+        status: false,
+      })
+      return
+    }
+    const hashPass = await bcrypt.compare(password, user.password)
+    if (!hashPass) {
+      res.json({
+        message: 'email and password incorrect',
+        status: false,
+      })
+      return
+    }
+    const token = await jwt.sign(
+      {
+        _id: user._id,
+        email: user.email,
+      },
+      'PRIVATEKEY'
+    )
+    res.status(201).json({
+      message: 'user login successfully',
+      status: true,
       data: user,
-      message: 'get user',
-      status: 200,
+      token,
     })
   } catch (error) {
     res.json({
