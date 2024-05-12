@@ -12,7 +12,7 @@ var userIsAuthorised = false
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(function (req, res, next) {
-    const password = req.body['password']
+    const password = req.body["password"]
     if (password === 'iloveprogramming') {
         userIsAuthorised = true
     }
@@ -24,9 +24,9 @@ app.get('/', (req, res) => {
 })
 app.post('/check', (req, res) => {
     if (userIsAuthorised) {
-        res.sendFile(__dirname + "/public/secret.html")
+        return res.sendFile(__dirname + "/public/secret.html")
     } else {
-        res.sendFile(__dirname + "/public/public.html")
+        return res.sendFile(__dirname + "/public/public.html")
     }
 })
 

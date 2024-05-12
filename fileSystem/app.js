@@ -66,8 +66,11 @@ const fs = require('node:fs');
 
 // readfile
 
-// fs.readFile("test.js", "utf8", function (error) {
+// fs.readFile("test.js", "utf8", function (error,res) {
 //     if (error) console.log(error)
-//     else console.log("readfile")
+//     else console.log(res)
     
 // })
+// createFloder
+
+// fs.mkdir("./create/temp/a", { recursive: true },(error)=>{})
