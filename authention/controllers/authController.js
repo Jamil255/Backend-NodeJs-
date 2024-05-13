@@ -1,12 +1,13 @@
-import bcrypt, { hash } from 'bcrypt'
+import bcrypt from 'bcrypt'
 import userModel from '../models/userSchema.js'
 import jwt from 'jsonwebtoken'
+
 const handleSingUpFun = async (req, res) => {
   try {
     const { fullName, email, password, gender, age } = req.body
     if (!fullName || !email || !password || !gender || !age) {
       res.json({
-        message: 'input field is  required',
+        message: 'input field is required',
         status: false,
       })
       return
@@ -37,6 +38,7 @@ const handleSingUpFun = async (req, res) => {
     })
   }
 }
+
 const handleSingInFun = async (req, res) => {
   try {
     const { email, password } = req.body
@@ -45,6 +47,7 @@ const handleSingInFun = async (req, res) => {
         message: 'input field is required',
         status: false,
       })
+      return // Ensure to return after sending the response
     }
     const user = await userModel.findOne({ email })
     if (!user) {
@@ -82,4 +85,5 @@ const handleSingInFun = async (req, res) => {
     })
   }
 }
+
 export { handleSingUpFun, handleSingInFun }
