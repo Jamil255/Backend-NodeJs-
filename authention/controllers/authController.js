@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import userModel from '../models/userSchema.js'
 import jwt from 'jsonwebtoken'
+import sendOpt from '../utils/sendOpt.js'
 
 const handleSingUpFun = async (req, res) => {
   try {
@@ -26,6 +27,7 @@ const handleSingUpFun = async (req, res) => {
       password: hashPass,
     }
     const userResponse = await userModel.create(obj)
+    await sendOpt()
     res.json({
       message: 'user created successfully',
       status: true,
