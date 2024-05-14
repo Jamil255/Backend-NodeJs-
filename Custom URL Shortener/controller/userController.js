@@ -1,7 +1,7 @@
 import userModel from '../models/userSchema.js'
 import bcrypt, { hash } from 'bcrypt'
 import { v4 as uuidv4 } from 'uuid'
-import {setUser}from "../services/helperfun.js"
+import { setUser } from '../services/helperfun.js'
 const handleSingUpFun = async (req, res) => {
   try {
     const { name, email, password } = req.body
@@ -49,9 +49,9 @@ const handleSingInFun = async (req, res) => {
       })
       return
     }
-    const sessionId = uuidv4()
-    setUser(sessionId, user)
-    res.cookie('uid', sessionId)
+
+    const token = setUser(user)
+    res.cookie('uid', token)
     return res.redirect('/api/home')
   } catch (error) {
     res.json({

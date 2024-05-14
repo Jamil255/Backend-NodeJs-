@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser'
 import StaticRouter from './routes/StaticRoute.js'
 import path from 'path'
 const app = express()
-const PORT = 8000
+const PORT = 3000
 connectDb()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
