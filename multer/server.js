@@ -2,8 +2,10 @@ import express from 'express'
 import connectDb from './config/db.js'
 import { cloudinaryConfig } from './config/cloudinaryConfig.js'
 import routes from './routes/index.js'
+import cors from "cors"
 const app = express()
 connectDb()
+app.use(cors({ origin: '*' }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(routes)
