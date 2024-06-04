@@ -9,5 +9,5 @@ app.use(route)
 connectDb()
 
 app.listen(PORT, (req, res) => {
-  console.log(`listening on ${PORT}`)
+  console.log(`listening on http://localhost: ${PORT}`)
 })

@@ -40,7 +40,7 @@ const handleSingUpFun = async (req, res) => {
 
     const response = await transporter.sendMail({
       from: process.env.GMAIL_ACCOUNT,
-      to: 'maji4552@gmail.com',
+      to: 'jamilafzal255@gmail.com',
       subject: 'Email Verfication',
       html: EmailVerificationHtml(otp),
     })

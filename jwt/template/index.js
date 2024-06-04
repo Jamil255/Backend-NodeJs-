@@ -1,4 +1,4 @@
-export const EmailVerificationHtml = (OTP) => {
+export const EmailVerificationHtml = (OTP,name) => {
     return `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -37,7 +37,7 @@ export const EmailVerificationHtml = (OTP) => {
       <body>
         <div class="container">
           <h2>OTP Verification</h2>
-          <p>Dear User,</p>
+          <p>Dear ${name},</p>
           <p>Your OTP (One-Time Password) for verification is:</p>
           <p class="otp-code"> ${OTP} </p> <!-- Replace "123456" with the actual OTP -->
           <p>Please enter this OTP on the verification page to complete the process.</p>
