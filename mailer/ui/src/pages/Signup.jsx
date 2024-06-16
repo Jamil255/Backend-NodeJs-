@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Base_URL } from '../config'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
   const [fullName, setfullName] = useState()
@@ -26,6 +26,10 @@ const Signup = () => {
       console.log(error.message)
     }
   }
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    token ? navigate('/dashboard') : navigate('/signup')
+  }, [])
   return (
     <div>
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -84,6 +88,7 @@ const Signup = () => {
             </div>
 
             <div>
+              <Link to={'/'}> Already Account? login </Link>
               <button
                 type="submit"
                 className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"

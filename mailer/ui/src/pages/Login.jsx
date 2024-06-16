@@ -1,10 +1,12 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Base_URL } from '../config'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const navigate = useNavigate()
   const loginHandler = async (event) => {
     try {
       event.preventDefault()
@@ -13,11 +15,16 @@ const Login = () => {
         password,
       }
       const userRes = await axios.post(`${Base_URL}/login`, obj)
-      console.log(userRes)
+      localStorage.setItem('token', userRes.data?.token)
+      navigate('/dashboard')
     } catch (error) {
       console.log(userRes)
     }
   }
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    token ? navigate('/dashboard') : navigate('/')
+  }, [])
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
@@ -56,27 +63,14 @@ const Login = () => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="remember_me"
-                name="remember_me"
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-              />
-              <label
-                htmlFor="remember_me"
-                className="block ml-2 text-sm text-gray-900"
-              >
-                Remember me
-              </label>
-            </div>
+        
             <div className="text-sm">
-              <a
-                href="#"
+              <Link
+                to={'/signup'}
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                Forgot your password?
-              </a>
+                Create A New Account
+              </Link>
             </div>
           </div>
           <div>
