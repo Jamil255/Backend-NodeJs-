@@ -9,6 +9,7 @@ const Login = () => {
   const navigate = useNavigate()
   const loginHandler = async (event) => {
     try {
+      console.log(email,password)
       event.preventDefault()
       const obj = {
         email,
