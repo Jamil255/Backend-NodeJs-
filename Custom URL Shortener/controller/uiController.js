@@ -4,6 +4,7 @@ const handleHomePage = async (req, res) => {
   try {
     if (!req.user) return res.redirect('/api/login')
     const allUrls = await URL.find({ createdBy: req.user._id })
+    console.log(allUrls)
     return res.render('home', {
       urls: allUrls,
     })
