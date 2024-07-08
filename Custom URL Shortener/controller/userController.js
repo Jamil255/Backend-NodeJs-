@@ -13,6 +13,7 @@ const handleSingUpFun = async (req, res) => {
       return
     }
     const hashPass = await bcrypt.hash(password, 10)
+    console.log(hashPass)
     const obj = {
       ...req.body,
       password: hashPass,
