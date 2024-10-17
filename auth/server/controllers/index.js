@@ -1,4 +1,6 @@
 import userModel from '../models/userSchema.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 const signUpHandler = async (req, res) => {
   try {
@@ -14,7 +16,12 @@ const signUpHandler = async (req, res) => {
         message: 'User already exists',
       })
     }
-    const userCreate = await userModel.create({ userName, password, email })
+    const hashpass = await bcrypt.hash(password, 10)
+    const userCreate = await userModel.create({
+      userName,
+      password: hashpass,
+      email,
+    })
     res.status(201).json({
       message: 'User created',
       data: userCreate,
@@ -29,12 +36,11 @@ const loginHandler = async (req, res) => {
   try {
     const { email, password } = req.body
     if (!email || !password) {
-      return res.status(401).json({
+      return res.status(400).json({
         message: 'input is required',
       })
     }
     const user = await userModel.findOne({ email })
-    console.log(user)
 
     if (!user) {
       res.status(401).json({
@@ -42,9 +48,25 @@ const loginHandler = async (req, res) => {
       })
       return
     }
+    const comparePass = await bcrypt.compare(password, user.password)
+
+    if (!comparePass) {
+      res.status(401).json({
+        message: 'invalid email and password',
+      })
+      return
+    }
+    const token = jwt.sign(
+      {
+        _id: user?._id,
+        email: user?.email,
+      },
+      'tokenmsmmsms'
+    )
     return res.status(200).json({
       message: 'successfully login',
       data: user,
+      token,
     })
   } catch (error) {
     res.status(500).json({
